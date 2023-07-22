@@ -1,0 +1,39 @@
+@import "variables";
+@import "header";
+@import "recipe-list";
+@import "mobile-recipe-list";
+@import "recipe-details";
+@import "add-recipe";
+@import "register";
+@import "login";
+@import "login-needed";
+@import "edit-recipe";
+@import "delete-recipe";
+@import "bookmarks";
+@import "auth";
+@import "add-bookmark";
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Regular.ttf");
+}
+
+body {
+  font-family: Roboto;
+  background-color: white;
+  color: $dark-gray;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  font-family: "Roboto";
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}

@@ -1,0 +1,15 @@
+# Python virtual environment
+venv/
+
+# Django-generated files
+*.pyc
+__pycache__/
+
+# Log files
+*.log
+
+# Cache files
+*.cache
+
+#.env
+.env

@@ -1,0 +1,193 @@
+.edit_recipe {
+  &-modal {
+    background-color: white;
+    width: 40%;
+    height: 60%;
+    z-index: 9500;
+    overflow-y: auto;
+  }
+
+  &-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.edit-recipe-header {
+  font-size: 22px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.edit_recipe-modal {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.edit_recipe-modal form {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.edit_form_field {
+  padding: 20px;
+}
+
+.edit_form_field:hover {
+  background-color: $primary-color;
+}
+
+.edit_recipe_form_input_title {
+  margin: 0;
+  margin-bottom: 2px;
+  font-size: 16px;
+}
+
+.edit_recipe-modal form {
+  
+  input {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 80%;
+  color: $dark-gray;
+  font-family: Roboto;
+  }
+
+  .input_small {
+  width: 20%;
+  }
+
+  .input_xs {
+    width: 10%;
+  }
+}
+
+.edit_recipe-modal button {
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+}
+
+.edit_recipe-modal .submit_btn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: $primary-color;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Roboto;
+  padding: 5px;
+}
+
+.add_tag_btn {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  background-color: $primary-color;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Roboto;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.edit_recipe-modal .tags {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-bottom: 10px;
+  row-gap: 15px;
+  column-gap: 10px;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 15px;
+
+  .tag {
+    background-color: $secondary-color;
+    padding: 5px;
+    border-radius: 10px;
+
+
+    &:hover {
+      background-color: lightgray;
+    }
+  }
+}
+
+.edit_recipe-modal .ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 15px;
+  column-gap: 10px;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 15px;
+
+  .ingredient {
+    background-color: $secondary-color;
+    padding: 5px;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: lightgray;
+    }
+  }
+}
+
+.edit_ingredient_btn {
+  background-color: $primary-color;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Roboto;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.upload_result_modal {
+  text-align: center;
+  background-color: white;
+  border-radius: 20px;
+  border: none;
+  font-weight: 600;
+  z-index: 10000;
+  font-size: 24px;
+  padding: 20px;
+}
+
+.close_upload_result_modal_btn {
+  margin-top: 20px;
+  color: white;
+  text-align: center;
+  background-color: $primary-color;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.upload_result_modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}

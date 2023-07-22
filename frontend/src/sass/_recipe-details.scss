@@ -1,0 +1,278 @@
+.details {
+  position: relative;
+  width: 60%; 
+}
+
+.message {
+  font-size: 24px;
+  font-weight: 700;
+
+  p {
+    text-align: center;
+  }
+
+
+  &-start {
+    display: flex;
+    align-items: center;
+
+    &-img {
+      height: 100%;
+    }
+  }
+}
+
+.spinner {
+  display: block;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  border: 16px solid $secondary-color; /* Light grey */
+  border-top: 16px solid $primary-color; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.recipe__control_container{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 5%;
+  margin-right: 5%;
+
+  h1 {
+    @media (max-width:640px) {
+      font-size: 24px;
+    }
+  }
+}
+
+.recipe__control-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+}
+
+
+.edit_recipe-btn {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: $primary-color;
+  padding: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+}
+.delete_recipe-btn {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: $primary-color;
+  padding: 2px;
+  max-height: 24px;
+  max-width: 100px;
+  padding-left: 8px;
+  padding-right: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+}
+
+
+
+.recipe {
+  padding: 2%;
+  &__fig {
+    position: relative;
+    margin-right: 5%;
+    height: 30vh;
+    margin-inline-start: 5%;
+  }
+
+  &__details {
+    display: flex;
+    gap: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    justify-content: center;
+    position: relative;
+    
+      @media (max-width: 350px) {
+        margin-left: 0%;
+        margin-right: 0%;
+      }
+  }
+
+  &__heading {
+    margin-right: 5%;
+    padding-left: 5%;
+    background-color: rgb(253, 212, 171);
+    margin-left: 5%;
+  }
+
+  &__tags-container {
+    display: flex;
+    gap: 10px;
+    margin-left: 10%;
+    font-size: larger;
+    font-weight: bold;
+    color: $primary-color;
+  }
+
+  &__tags-tag {
+    cursor: pointer;
+  }
+
+  .comma {
+    color: black;
+  }
+
+  &__info {
+    text-align: center;
+    display: flex;
+
+    &-data {
+      &--minutes {
+        margin-right: 5px;
+      }
+    }
+
+    &-servings {
+      margin-right: 0.5vh;
+
+      &-btn {
+        margin-right: 0.5vh;
+        margin-left: 0.5vh;
+        width: 24px;
+        border-radius: 5px;
+        background-color: $primary-color;
+        border: none;
+        font-weight: 900;
+      }
+    }
+  }
+
+  &__img {
+    position: absolute;
+    object-fit: cover;
+    text-align: center;
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__title {
+    background-color: $primary-color;
+    opacity: 0.8;
+    font-size: 30px;
+    font-weight: 600;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+  }
+
+  &__ingredients-container {
+    display: flex;
+    margin-left: 10%;
+    font-size: larger;
+    margin-right: 10%;
+  }
+
+  &__ingredient-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding-inline-start: 0px;
+  }
+
+  &__ingredient {
+    display: flex;
+    flex-wrap: wrap;
+    white-space: normal;
+
+    @media (max-width: 400px) {
+      font-size: 14px;
+    }
+  }
+
+  &__quantity {
+    margin-right: 5px;
+    flex-wrap: wrap;
+  }
+
+  &__unit {
+    flex-wrap: wrap;
+    margin-right: 5px;
+  }
+
+  &__directions {
+    &-text {
+
+      margin-left: 10%;
+      margin-right: 5%;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    &-link {
+      text-decoration: none;
+      color: $primary-color;
+    }
+  }
+}
+
+.recipe_modal_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  z-index: 10000;
+
+  .recipe_modal {
+    background: white;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .edit_recipe-btn {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .delete_recipe-btn {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+  }
+}

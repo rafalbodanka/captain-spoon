@@ -1,0 +1,36 @@
+.bookmark_not-added:hover {
+  cursor: pointer;
+  content: url("../img/bookmarks_icon-added.png");
+}
+
+.bookmark_added:hover {
+  cursor: pointer;
+  content: url("../img/bookmarks_icon-notadded.png");
+}
+
+.bookmark_result {
+  &_modal {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-height: 8vh;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 9500;
+    position: fixed;
+    text-align: center;
+  }
+
+  &_modal_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
