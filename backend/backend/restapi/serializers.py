@@ -33,6 +33,7 @@ class IngredientSerializer(serializers.Serializer):
     unit = serializers.CharField(
         max_length=20, required=False, allow_blank=True)
 
+
 class RecipeSerializer(serializers.ModelSerializer):
     creator = serializers.SerializerMethodField()
 
@@ -95,6 +96,8 @@ class RecipeSerializer(serializers.ModelSerializer):
         # Update the fields of the instance with the validated data
         instance.detail_url = validated_data.get(
             'detail_url', instance.detail_url)
+        instance.image_url = validated_data.get(
+            'image_url', instance.image_url)
         instance.title = validated_data.get('title', instance.title)
         instance.publisher = validated_data.get(
             'publisher', instance.publisher)
@@ -103,6 +106,8 @@ class RecipeSerializer(serializers.ModelSerializer):
         instance.description = validated_data.get(
             'description', instance.description)
         instance.servings = validated_data.get('servings', instance.servings)
+        instance.cooking_time = validated_data.get(
+            'cooking_time', instance.cooking_time)
         instance.creator = validated_data.get('creator', instance.creator)
 
         # Update the tags of the recipe
@@ -123,6 +128,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
 
 class RecipeAddSerializer(serializers.ModelSerializer):
     creator = serializers.SerializerMethodField()
@@ -175,10 +181,13 @@ class RecipeAddSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         tags_data = validated_data.pop('tags', [])
         ingredients_data = validated_data.pop('ingredients', [])
+        print(validated_data)
 
         # Update the fields of the instance with the validated data
         instance.detail_url = validated_data.get(
             'detail_url', instance.detail_url)
+        instance.image_url = validated_data.get(
+            'image_url', instance.image_url)
         instance.title = validated_data.get('title', instance.title)
         instance.publisher = validated_data.get(
             'publisher', instance.publisher)
@@ -187,6 +196,8 @@ class RecipeAddSerializer(serializers.ModelSerializer):
         instance.description = validated_data.get(
             'description', instance.description)
         instance.servings = validated_data.get('servings', instance.servings)
+        instance.cooking_time = validated_data.get(
+            'cooking_time', instance.cooking_time)
         instance.creator = validated_data.get('creator', instance.creator)
 
         # Update the tags of the recipe

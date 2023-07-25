@@ -30,7 +30,8 @@ class Tag(models.Model):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)
-    quantity = models.FloatField(null=True, blank=True, validators=[validate_quantity])
+    quantity = models.FloatField(
+        null=True, blank=True, validators=[validate_quantity])
     unit = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
@@ -60,9 +61,8 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     publisher_url = models.URLField(blank=True)
-    image_url = models.URLField(blank=True)
+    image_url = models.URLField(max_length=1000, blank=True)
     tags = models.ManyToManyField(Tag)
-    # instructions = models.TextField()
 
     def __str__(self):
         return self.title
@@ -85,5 +85,3 @@ class RecipeTag(models.Model):
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-
-
