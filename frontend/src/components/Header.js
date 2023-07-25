@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "../sass/main.scss";
 import logo_icon from "../img/logo_icon.png";
 import user_icon from "../img/user_icon.png";
@@ -42,11 +42,10 @@ const Header = ({
   const [isLoginNeededModalOpen, setIsLoginNeededModalOpen] = useState(false);
   const [isUserRecipesEmpty, setIsUserRecipesEmpty] = useState(false);
   const [isUserBookmarksEmpty, setIsUserBookmarksEmpty] = useState(false);
-  const [userRecipesSignal, setUserRecipesSignal] = useState(false)
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isRecipeListLoading, setIsRecipeListLoading] = useState(false)
-  const [isRecipeListOpen, setIsRecipeListOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isRecipeListLoading, setIsRecipeListLoading] = useState(false);
+  const [isRecipeListOpen, setIsRecipeListOpen] = useState(false);
 
   function closeEmptyUserRecipesModal() {
     setIsUserRecipesEmpty(false);
@@ -59,7 +58,6 @@ const Header = ({
   function closeAddRecipeModal(event) {
     if (event.target === event.currentTarget) {
       setIsAddRecipeModalOpen(false);
-
     }
   }
 
@@ -79,27 +77,29 @@ const Header = ({
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  // useEffect(() => {
-  //   if (searchQuery !== "")
-  //   {
-  //     handleSearch()
-  //   }
-  // }, [searchQuery])
+  useEffect(() => {
+    if (searchQuery !== "") {
+      handleSearch();
+    }
+  }, [searchQuery]);
 
   const handleSearch = async () => {
-    setRecipes([])
-    setLoadingRecipeList(true)
-    setIsRecipeListLoading(true)
-    setIsRecipeListOpen(true)
-    setIsQueryResultsEmpty(false)
+    setRecipes([]);
+    setLoadingRecipeList(true);
+    setIsRecipeListLoading(true);
+    setIsRecipeListOpen(true);
+    setIsQueryResultsEmpty(false);
     const lowerCaseSearchQuery = searchQuery.toLowerCase();
-    if (lowerCaseSearchQuery === "bookmark" || lowerCaseSearchQuery === "bookmarks") {
+    if (
+      lowerCaseSearchQuery === "bookmark" ||
+      lowerCaseSearchQuery === "bookmarks"
+    ) {
       setSearchQuery("bookmarks");
-      setRecipes(userBookmarks)
+      setRecipes(userBookmarks);
       setCurrentPage(1);
-      setLoadingRecipeList(false)
-      setIsRecipeListLoading(false)
-      return
+      setLoadingRecipeList(false);
+      setIsRecipeListLoading(false);
+      return;
     }
 
     const data = await getJSON(API_SEARCH_URL, { searchQuery: searchQuery });
@@ -112,17 +112,13 @@ const Header = ({
     }
     setCurrentPage(1);
     setResultsType("Results");
-    setLoadingRecipeList(false)
-    setIsRecipeListLoading(false)
+    setLoadingRecipeList(false);
+    setIsRecipeListLoading(false);
   };
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
-  useEffect(() => {
-    handleSearch();
-  }, [searchQuery])
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
@@ -135,14 +131,14 @@ const Header = ({
 
   const openMenu = () => {
     setIsMenuOpen(true);
-  }
+  };
 
   const closeMenu = (event) => {
     if (event.target === event.currentTarget) {
       setIsMenuOpen(false);
     }
-  }
-  
+  };
+
   return (
     <>
       <div className="header">
@@ -154,29 +150,32 @@ const Header = ({
             onClick={() => {
               setRecipes([]);
               setSearchQuery("");
-              document.querySelector('.search__field').value="";
+              document.querySelector(".search__field").value = "";
               setRecipeDetails("");
               setIsQueryResultsEmpty(false);
-              navigate('/');
-              setResultsType("")
+              navigate("/");
+              setResultsType("");
             }}
           />
         </div>
         <div className="header_middle">
           <div className="search_form-container">
-            <div className="search_form" onClick={() => 
-            {
-              if (recipes.length > 1) {
-                setIsRecipeListOpen(true)
-              }
-            }
-            }>
+            <div
+              className="search_form"
+              onClick={() => {
+                if (recipes.length > 1) {
+                  setIsRecipeListOpen(true);
+                }
+              }}
+            >
               <input
                 type="text"
                 value={searchQuery}
                 onChange={handleInputChange}
                 className="search__field"
-                placeholder={isSmallMobile ? "Search" : "What argh we gonna cook today?"}
+                placeholder={
+                  isSmallMobile ? "Search" : "What argh we gonna cook today?"
+                }
                 onKeyDown={(event) => {
                   if (event.key === "Enter") handleSearch();
                 }}
@@ -184,7 +183,7 @@ const Header = ({
               <div className="search__btn" onClick={handleSearch}>
                 &#128269;
               </div>
-              {isMobile &&
+              {isMobile && (
                 <MobileRecipeList
                   resultsType={resultsType}
                   setResultsType={setResultsType}
@@ -201,187 +200,197 @@ const Header = ({
                   setIsRecipeListLoading={setIsRecipeListLoading}
                   isSmallMobile={isSmallMobile}
                 />
-              }
+              )}
             </div>
           </div>
         </div>
-        {isMobile ?
-        <div>
-          {isMenuOpen && 
-          <div className="menu-overlay" onClick={closeMenu}>
-            <div className="menu-modal">
-              <div className="menu-modal-grid">
-                {isLoggedIn && (
-                  <>
-                    <div className="recipe_add-btn" onClick={openAddRecipeModal}>
-                      + Add recipe
+        {isMobile ? (
+          <div>
+            {isMenuOpen && (
+              <div className="menu-overlay" onClick={closeMenu}>
+                <div className="menu-modal">
+                  <div className="menu-modal-grid">
+                    {isLoggedIn && (
+                      <>
+                        <div
+                          className="recipe_add-btn"
+                          onClick={openAddRecipeModal}
+                        >
+                          + Add recipe
+                        </div>
+                      </>
+                    )}
+                    {!isLoggedIn && (
+                      <div
+                        className="recipe_add-btn"
+                        onClick={openLoginNeededModal}
+                      >
+                        + Add recipe
+                      </div>
+                    )}
+                    <div className="user_icon" onClick={toggleDropdown}>
+                      <img
+                        src={user_icon}
+                        className="user__icon-img"
+                        alt="User_Icon"
+                      />
+                      <span>{username}</span>
                     </div>
-                  </>
-                )}
-                {!isLoggedIn && (
-                    <div className="recipe_add-btn" onClick={openLoginNeededModal}>
-                      + Add recipe
-                    </div>
-                )}
-                <div
-                  className="user_icon"
-                  onClick={toggleDropdown}
-                >
-                  <img src={user_icon} className="user__icon-img" alt="User_Icon" />
-                  <span>
-                    {username}
-                  </span>
-                </div>
-                  {isDropdownOpen && (
-                    <div className="dropdown">
-                      <ul>
-                        {!username ? (
-                          <>
-                            <li>
-                              <div className="dropdown_link">
-                                <Link to="/login">Login</Link>
-                              </div>
-                            </li>
-                            <li>
-                              <div className="dropdown_link">
-                                <Link to="/register">Register</Link>
-                              </div>
-                            </li>
-                          </>
-                        ) : (
-                          <>
-                            <UserRecipes
-                              resultsType={resultsType}
-                              setResultsType={setResultsType}
-                              setLoadingRecipeList={setLoadingRecipeList}
-                              setIsRecipeListLoading={setIsRecipeListLoading}
-                              setIsMenuOpen={setIsMenuOpen}
-                              setIsRecipeListOpen={setIsRecipeListOpen}
-                              isMobile={isMobile}
-                              setSearchQuery={setSearchQuery}
-                              setRecipes={setRecipes}
-                              setCurrentPage={setCurrentPage}
-                              username={username}
-                              setIsUserRecipesEmpty={setIsUserRecipesEmpty}
-                            ></UserRecipes>
-                            <li onClick={handleLogout}>Logout</li>{" "}
-                          </>
-                        )}
-                      </ul>
-                    </div>
-                  )}
-                <FetchUserBookmarks
-                    isLoggedIn={isLoggedIn}
-                    userBookmarks={userBookmarks}
-                    setUserBookmarks={setUserBookmarks}
-                    isUserBookmarksEmpty={isUserBookmarksEmpty}
-                    setIsUserBookmarksEmpty={setIsUserBookmarksEmpty}
-                    setBookmarksIdList={setBookmarksIdList}
-                ></FetchUserBookmarks>
-                  <Bookmarks
-                    resultsType={resultsType}
-                    setResultsType={setResultsType}
-                    setIsMenuOpen={setIsMenuOpen}
-                    setIsRecipeListOpen={setIsRecipeListOpen}
-                    isMobile={isMobile}
-                    setSearchQuery={setSearchQuery}
-                    setRecipes={setRecipes}
-                    setCurrentPage={setCurrentPage}
-                    username={username}
-                    setIsUserRecipesEmpty={setIsUserBookmarksEmpty}
-                    userBookmarks={userBookmarks}
-                    setUserBookmarks={setUserBookmarks}
+                    {isDropdownOpen && (
+                      <div className="dropdown">
+                        <ul>
+                          {!username ? (
+                            <>
+                              <li>
+                                <div className="dropdown_link">
+                                  <Link to="/login">Login</Link>
+                                </div>
+                              </li>
+                              <li>
+                                <div className="dropdown_link">
+                                  <Link to="/register">Register</Link>
+                                </div>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <UserRecipes
+                                resultsType={resultsType}
+                                setResultsType={setResultsType}
+                                setLoadingRecipeList={setLoadingRecipeList}
+                                setIsRecipeListLoading={setIsRecipeListLoading}
+                                setIsMenuOpen={setIsMenuOpen}
+                                setIsRecipeListOpen={setIsRecipeListOpen}
+                                isMobile={isMobile}
+                                setSearchQuery={setSearchQuery}
+                                setRecipes={setRecipes}
+                                setCurrentPage={setCurrentPage}
+                                username={username}
+                                setIsUserRecipesEmpty={setIsUserRecipesEmpty}
+                              ></UserRecipes>
+                              <li onClick={handleLogout}>Logout</li>{" "}
+                            </>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                    <FetchUserBookmarks
+                      isLoggedIn={isLoggedIn}
+                      userBookmarks={userBookmarks}
+                      setUserBookmarks={setUserBookmarks}
+                      isUserBookmarksEmpty={isUserBookmarksEmpty}
+                      setIsUserBookmarksEmpty={setIsUserBookmarksEmpty}
+                      setBookmarksIdList={setBookmarksIdList}
+                    ></FetchUserBookmarks>
+                    <Bookmarks
+                      resultsType={resultsType}
+                      setResultsType={setResultsType}
+                      setIsMenuOpen={setIsMenuOpen}
+                      setIsRecipeListOpen={setIsRecipeListOpen}
+                      isMobile={isMobile}
+                      setSearchQuery={setSearchQuery}
+                      setRecipes={setRecipes}
+                      setCurrentPage={setCurrentPage}
+                      username={username}
+                      setIsUserRecipesEmpty={setIsUserBookmarksEmpty}
+                      userBookmarks={userBookmarks}
+                      setUserBookmarks={setUserBookmarks}
                     ></Bookmarks>
+                  </div>
+                </div>
               </div>
-              </div>
+            )}
+            <img
+              src={icon_menu}
+              alt="icons8 icon menu"
+              onClick={openMenu}
+              className="icon_menu"
+            ></img>
           </div>
-          }
-          <img src={icon_menu} alt="icons8 icon menu" onClick={openMenu} className="icon_menu"></img>
-        </div>
-        :
-        <div className="user_icons">
-          {isLoggedIn && (
-            <>
-              <div className="recipe_add-btn" onClick={openAddRecipeModal}>
-                +
-              </div>
-            </>
-          )}
-          {!isLoggedIn && (
+        ) : (
+          <div className="user_icons">
+            {isLoggedIn && (
+              <>
+                <div className="recipe_add-btn" onClick={openAddRecipeModal}>
+                  +
+                </div>
+              </>
+            )}
+            {!isLoggedIn && (
               <div className="recipe_add-btn" onClick={openLoginNeededModal}>
                 +
               </div>
-          )}
-          <div
-            className="user_icon"
-            onMouseEnter={toggleDropdown}
-            onMouseLeave={toggleDropdown}
-          >
-            <img src={user_icon} className="user__icon-img" alt="User_Icon" />
-            {username}
-            {isDropdownOpen && (
-              <div className="dropdown">
-                <ul>
-                  {!username ? (
-                    <>
-                      <li>
-                        <div className="dropdown_link">
-                          <Link to="/login">Login</Link>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="dropdown_link">
-                          <Link to="/register">Register</Link>
-                        </div>
-                      </li>
-                    </>
-                  ) : (
-                    <>
-                      <UserRecipes
-                        resultsType={resultsType}
-                        setResultsType={setResultsType}
-                        setLoadingRecipeList={setLoadingRecipeList}
-                        setIsRecipeListLoading={setIsRecipeListLoading}
-                        setIsMenuOpen={setIsMenuOpen}
-                        setIsRecipeListOpen={setIsRecipeListOpen}
-                        isMobile={isMobile}
-                        setSearchQuery={setSearchQuery}
-                        setRecipes={setRecipes}
-                        setCurrentPage={setCurrentPage}
-                        username={username}
-                        setIsUserRecipesEmpty={setIsUserRecipesEmpty}
-                      ></UserRecipes>
-                      <li onClick={handleLogout}>Logout</li>{" "}
-                    </>
-                  )}
-                </ul>
-              </div>
             )}
-          </div>
-          <FetchUserBookmarks
+            <div
+              className="user_icon"
+              onMouseEnter={toggleDropdown}
+              onMouseLeave={toggleDropdown}
+            >
+              <img src={user_icon} className="user__icon-img" alt="User_Icon" />
+              {username}
+              {isDropdownOpen && (
+                <div className="dropdown">
+                  <ul>
+                    {!username ? (
+                      <>
+                        <li>
+                          <div className="dropdown_link">
+                            <Link to="/login">Login</Link>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="dropdown_link">
+                            <Link to="/register">Register</Link>
+                          </div>
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <UserRecipes
+                          resultsType={resultsType}
+                          setResultsType={setResultsType}
+                          setLoadingRecipeList={setLoadingRecipeList}
+                          setIsRecipeListLoading={setIsRecipeListLoading}
+                          setIsMenuOpen={setIsMenuOpen}
+                          setIsRecipeListOpen={setIsRecipeListOpen}
+                          isMobile={isMobile}
+                          setSearchQuery={setSearchQuery}
+                          setRecipes={setRecipes}
+                          setCurrentPage={setCurrentPage}
+                          username={username}
+                          setIsUserRecipesEmpty={setIsUserRecipesEmpty}
+                        ></UserRecipes>
+                        <li onClick={handleLogout}>Logout</li>{" "}
+                      </>
+                    )}
+                  </ul>
+                </div>
+              )}
+            </div>
+            <FetchUserBookmarks
               isLoggedIn={isLoggedIn}
               userBookmarks={userBookmarks}
               setUserBookmarks={setUserBookmarks}
               isUserBookmarksEmpty={isUserBookmarksEmpty}
               setIsUserBookmarksEmpty={setIsUserBookmarksEmpty}
               setBookmarksIdList={setBookmarksIdList}
-          ></FetchUserBookmarks>
-          <Bookmarks
-            resultsType={resultsType}
-            setResultsType={setResultsType}
-            setIsMenuOpen={setIsMenuOpen}
-            setIsRecipeListOpen={setIsRecipeListOpen}
-            isMobile={isMobile}
-            setSearchQuery={setSearchQuery}
-            setRecipes={setRecipes}
-            setCurrentPage={setCurrentPage}
-            username={username}
-            setIsUserRecipesEmpty={setIsUserBookmarksEmpty}
-            userBookmarks={userBookmarks}
-            setUserBookmarks={setUserBookmarks}
-          ></Bookmarks>
-        </div>
-        }
+            ></FetchUserBookmarks>
+            <Bookmarks
+              resultsType={resultsType}
+              setResultsType={setResultsType}
+              setIsMenuOpen={setIsMenuOpen}
+              setIsRecipeListOpen={setIsRecipeListOpen}
+              isMobile={isMobile}
+              setSearchQuery={setSearchQuery}
+              setRecipes={setRecipes}
+              setCurrentPage={setCurrentPage}
+              username={username}
+              setIsUserRecipesEmpty={setIsUserBookmarksEmpty}
+              userBookmarks={userBookmarks}
+              setUserBookmarks={setUserBookmarks}
+            ></Bookmarks>
+          </div>
+        )}
       </div>
       <AddRecipe
         isOpen={isAddRecipeModalOpen}
@@ -396,23 +405,23 @@ const Header = ({
         ariaHideApp={false}
       ></LoginNeeded>
       {isUserRecipesEmpty && (
-          <div
-            className="empty_user_recipes_modal-overlay"
-            onClick={closeEmptyUserRecipesModal}
-          >
-            <div className="empty_user_recipes_modal">
-              You have no recipes added yet.
-              <div
-                className="empty_user_recipes_modal_btn"
-                onClick={() => {
-                  openAddRecipeModal();
-                  closeEmptyUserRecipesModal();
-                }}
-              >
-                Add first recipe
-              </div>
+        <div
+          className="empty_user_recipes_modal-overlay"
+          onClick={closeEmptyUserRecipesModal}
+        >
+          <div className="empty_user_recipes_modal">
+            You have no recipes added yet.
+            <div
+              className="empty_user_recipes_modal_btn"
+              onClick={() => {
+                openAddRecipeModal();
+                closeEmptyUserRecipesModal();
+              }}
+            >
+              Add first recipe
             </div>
           </div>
+        </div>
       )}
     </>
   );
