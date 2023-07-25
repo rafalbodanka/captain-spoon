@@ -58,19 +58,22 @@ const DeleteRecipe = ({
         </div>
       )}
       {isDeleteRecipeModalOpen && (
-          <div
-            className="delete_recipe-modal-overlay"
-            onClick={closeDeleteRecipeModal}
-          >
-            <div className="delete_recipe-modal">
-              <div className="delete_recipe-message">
-                Do you want to delete that recipe?
-              </div>
-              <button className="submit_btn" type="submit" onClick={handleSubmit}>
-                Delete Recipe
-              </button>
+        <div
+          className="delete_recipe-modal-overlay"
+          onClick={closeDeleteRecipeModal}
+        >
+          <div className="delete_recipe-modal">
+            <div className="delete_recipe-message">
+              Do you want to delete that recipe?
             </div>
+            <button className="submit_btn" type="submit" onClick={handleSubmit}>
+              Delete Recipe
+            </button>
+            <button className="cancel_btn" onClick={closeDeleteRecipeModal}>
+              Cancel
+            </button>
           </div>
+        </div>
       )}
     </>
   );

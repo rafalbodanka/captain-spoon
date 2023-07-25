@@ -26,15 +26,28 @@
   text-align: center;
 }
 
-.delete_recipe-modal .submit_btn {
-  margin-top: 20px;
-  background-color: $primary-color;
-  border: none;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: Roboto;
-  padding: 5px;
-  cursor: pointer;
+.delete_recipe-modal {
+  .submit_btn {
+    margin-top: 20px;
+    background-color: $primary-color;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Roboto;
+    padding: 5px;
+    cursor: pointer;
+  }
+  .cancel_btn {
+    margin-top: 20px;
+    margin-left: 20px;
+    border: none;
+    background-color: white;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Roboto;
+    padding: 5px;
+    cursor: pointer;
+  }
 }
 
 .delete_result_modal {
