@@ -15,8 +15,8 @@ function App() {
   const [recipes, setRecipes] = useState([]);
   const [recipeDetails, setRecipeDetails] = useState("");
   const [loading, setLoading] = useState(false);
-  const [loadingRecipeList, setLoadingRecipeList] = useState(false)
-  const [loadingRecipeDetail, setLoadingRecipeDetail] = useState(false)
+  const [loadingRecipeList, setLoadingRecipeList] = useState(false);
+  const [loadingRecipeDetail, setLoadingRecipeDetail] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
@@ -24,10 +24,10 @@ function App() {
   const [userBookmarks, setUserBookmarks] = useState([]);
   const [bookmarksIdList, setBookmarksIdList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [resultsType, setResultsType] = useState("")
+  const [resultsType, setResultsType] = useState("");
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000)
-  const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth < 550)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
+  const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth < 550);
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,15 +35,11 @@ function App() {
       setIsSmallMobile(window.innerWidth <= 550);
     };
 
-    // Set initial value on component mount
     handleResize();
+    window.addEventListener("resize", handleResize);
 
-    // Add event listener to update the state when window is resized
-    window.addEventListener('resize', handleResize);
-
-    // Clean up the event listener on component unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -87,7 +83,7 @@ function App() {
                     setSearchQuery={setSearchQuery}
                   />
                   <div className="recipes_container">
-                    {!isMobile &&
+                    {!isMobile && (
                       <section className="results">
                         <RecipeList
                           resultsType={resultsType}
@@ -101,27 +97,27 @@ function App() {
                           isQueryResultsEmpty={isQueryResultsEmpty}
                         />
                       </section>
-                    }
-                      <RecipeDetails
-                        resultsType={resultsType}
-                        setResultsType={setResultsType}
-                        isMobile={isMobile}
-                        isSmallMobile={isSmallMobile}
-                        loading={loading}
-                        loadingRecipeDetail={loadingRecipeDetail}
-                        setLoadingRecipeDetail={setLoadingRecipeDetail}
-                        setLoading={setLoading}
-                        recipeDetails={recipeDetails}
-                        setRecipeDetails={setRecipeDetails}
-                        currentUser={username}
-                        recipes={recipes}
-                        setRecipes={setRecipes}
-                        bookmarksIdList={bookmarksIdList}
-                        userBookmarks={userBookmarks}
-                        setUserBookmarks={setUserBookmarks}
-                        setSearchQuery={setSearchQuery}
-                        setBookmarksIdList={setBookmarksIdList}
-                      />
+                    )}
+                    <RecipeDetails
+                      resultsType={resultsType}
+                      setResultsType={setResultsType}
+                      isMobile={isMobile}
+                      isSmallMobile={isSmallMobile}
+                      loading={loading}
+                      loadingRecipeDetail={loadingRecipeDetail}
+                      setLoadingRecipeDetail={setLoadingRecipeDetail}
+                      setLoading={setLoading}
+                      recipeDetails={recipeDetails}
+                      setRecipeDetails={setRecipeDetails}
+                      currentUser={username}
+                      recipes={recipes}
+                      setRecipes={setRecipes}
+                      bookmarksIdList={bookmarksIdList}
+                      userBookmarks={userBookmarks}
+                      setUserBookmarks={setUserBookmarks}
+                      setSearchQuery={setSearchQuery}
+                      setBookmarksIdList={setBookmarksIdList}
+                    />
                   </div>
                 </div>
               </>
@@ -129,12 +125,8 @@ function App() {
           />
           <Route
             path="register"
-            element=
-            {<Register
-              isLoggedIn={isLoggedIn}
-            />}
-            >
-          </Route>
+            element={<Register isLoggedIn={isLoggedIn} />}
+          ></Route>
           <Route
             path="login"
             element={
