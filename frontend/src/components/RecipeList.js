@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import iconSad from "../img/icon-sad.png"
+import { useNavigate } from "react-router-dom";
+import iconSad from "../img/icon-sad.png";
 
 const RecipeList = ({
   recipes,
@@ -14,7 +14,6 @@ const RecipeList = ({
 }) => {
   const [resultsPerPage, setResultsPerPage] = useState(10);
   const [hashValue, setHashValue] = useState(window.location.hash);
-
 
   const indexOfLastResult = currentPage * resultsPerPage;
   const indexOfFirstResult = indexOfLastResult - resultsPerPage;
@@ -46,12 +45,11 @@ const RecipeList = ({
     <>
       <div className="results_type">{resultsType}</div>
       <div className="results_list">
-        {loadingRecipeList &&       
-          <section className="details">
-            <div className="spinner_container">
-              <div className="spinner"></div>
-            </div>            
-          </section>}
+        {loadingRecipeList && (
+          <div className="spinner_container">
+            <div className="spinner"></div>
+          </div>
+        )}
         {!isQueryResultsEmpty &&
           currentResults.map((recipe) => {
             return (
@@ -80,7 +78,9 @@ const RecipeList = ({
             );
           })}
         {isQueryResultsEmpty && (
-          <div className="no_results_message">We couldn't find any matching recipe <img src={iconSad}></img></div>
+          <div className="no_results_message">
+            We couldn't find any matching recipe <img src={iconSad}></img>
+          </div>
         )}
       </div>
       {recipes.length > 10 ? (
