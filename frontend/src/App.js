@@ -3,15 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header.js";
 import RecipeList from "./components/RecipeList.js";
 import RecipeDetails from "./components/RecipeDetails.js";
-import { getJSON } from "./helper.js";
-import { API_URL } from "./config.js";
 import Register from "./components/Register.js";
 import Login from "./components/Login.js";
 import Authenticate from "./components/Auth.js";
-import axios from "axios";
-import fetchUserBookmarks from "./components/LoadBookmarks.js";
 
-function App() {
+const App = () => {
   const [recipes, setRecipes] = useState([]);
   const [recipeDetails, setRecipeDetails] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,6 +22,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [resultsType, setResultsType] = useState("");
 
+  //Responsivenss
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
   const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth < 550);
 
@@ -141,6 +138,6 @@ function App() {
       </BrowserRouter>
     </>
   );
-}
+};
 
 export default App;

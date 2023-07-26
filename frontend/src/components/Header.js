@@ -42,34 +42,33 @@ const Header = ({
   const [isLoginNeededModalOpen, setIsLoginNeededModalOpen] = useState(false);
   const [isUserRecipesEmpty, setIsUserRecipesEmpty] = useState(false);
   const [isUserBookmarksEmpty, setIsUserBookmarksEmpty] = useState(false);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isRecipeListLoading, setIsRecipeListLoading] = useState(false);
   const [isRecipeListOpen, setIsRecipeListOpen] = useState(false);
 
-  function closeEmptyUserRecipesModal() {
+  const closeEmptyUserRecipesModal = () => {
     setIsUserRecipesEmpty(false);
-  }
+  };
 
-  function openAddRecipeModal() {
+  const openAddRecipeModal = () => {
     setIsAddRecipeModalOpen(true);
-  }
+  };
 
-  function closeAddRecipeModal(event) {
+  const closeAddRecipeModal = (event) => {
     if (event.target === event.currentTarget) {
       setIsAddRecipeModalOpen(false);
     }
-  }
+  };
 
-  function openLoginNeededModal() {
+  const openLoginNeededModal = () => {
     setIsLoginNeededModalOpen(true);
-  }
+  };
 
-  function closeLoginNeededModal(event) {
+  const closeLoginNeededModal = (event) => {
     if (event.target === event.currentTarget) {
       setIsLoginNeededModalOpen(false);
     }
-  }
+  };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

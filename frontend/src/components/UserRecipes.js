@@ -5,7 +5,6 @@ import { USER_RECIPES_URL } from "../config";
 const UserRecipes = ({
   setIsMenuOpen,
   setIsRecipeListOpen,
-  setSearchQuery,
   setRecipes,
   setCurrentPage,
   username,
@@ -35,7 +34,7 @@ const UserRecipes = ({
       setIsUserRecipesEmpty(false);
       setIsMenuOpen(false);
       setIsRecipeListOpen(true);
-      setResultsType("User recipes")
+      setResultsType("User recipes");
     }
   };
 

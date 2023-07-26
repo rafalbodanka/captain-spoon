@@ -1,4 +1,3 @@
-import { TIMEOUT_SECONDS } from "./config";
 import axios from "axios";
 
 const timeout = function (s) {

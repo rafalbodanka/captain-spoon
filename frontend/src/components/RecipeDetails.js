@@ -13,12 +13,10 @@ import RecipeServings from "./RecipeServings";
 import { colors } from "@mui/material";
 
 const RecipeDetails = ({
-  isMobile,
   isSmallMobile,
   recipes,
   setRecipes,
   loading,
-  setLoading,
   recipeDetails,
   setRecipeDetails,
   currentUser,
@@ -28,13 +26,8 @@ const RecipeDetails = ({
   loadingRecipeDetail,
   setLoadingRecipeDetail,
   setSearchQuery,
-  setResultsType,
   setBookmarksIdList,
 }) => {
-  //upload
-  const [recipeUploadMessage, setRecipeUploadMessage] = useState("");
-  const [isRecipeUploadMessageModalOpen, setIsRecipeUploadMessageModalOpen] =
-    useState(false);
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
 
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -66,13 +59,7 @@ const RecipeDetails = ({
     setRecipeDetails({ ...data, ingredients: ingredientWithOffset });
   };
 
-  const handleRecipeUploadMessageModaClose = () => {
-    setIsRecipeUploadMessageModalOpen(false);
-  };
-
-  //delete
-  const [isDeleteRecipeModalOpen, setIsDeleteRecipeModalOpen] = useState(false);
-
+  // deleting recipe
   const [recipeDeleteMessage, setRecipeDeleteMessage] = useState("");
   const [isRecipeDeleteMessageModalOpen, setIsRecipeDeleteMessageModalOpen] =
     useState(false);

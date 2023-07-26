@@ -5,14 +5,11 @@ import bookmark_icon_added from "../img/bookmarks_icon-added.png";
 import bookmark_icon_notadded from "../img/bookmarks_icon-notadded.png";
 
 const AddBookmark = ({
-  recipes,
   recipeDetails,
   isBookmarked,
   setIsBookmarked,
-  userBookmarks,
   setUserBookmarks,
   setBookmarksIdList,
-  setRecipes,
 }) => {
   const [isBookmarkResultModalOpen, setIsBookmarkResultModalOpen] =
     useState(false);
@@ -28,7 +25,6 @@ const AddBookmark = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const recipeId = Number(recipeDetails.id);
 
     //adding bookmark
@@ -78,6 +74,7 @@ const AddBookmark = ({
           openBookmarkResultModal();
         });
     }
+
     // deleting bookmark
     if (isBookmarked) {
       axios
