@@ -104,54 +104,69 @@ const RecipeDetails = ({
           <h1>{recipeDetails.title}</h1>
           <div className="recipe__control-btns">
             {isSmallMobile ? (
-              <div>
-                <img
-                  src={iconMenu}
-                  alt="icons8 icon menu"
-                  className="icon_menu"
-                  onClick={() => setIsRecipeModalOpen(true)}
-                ></img>
-                {isRecipeModalOpen && (
-                  <div
-                    className="recipe_modal_overlay"
-                    onClick={(event) => {
-                      if (event.target === event.currentTarget)
-                        setIsRecipeModalOpen(false);
-                    }}
-                  >
-                    <div className="recipe_modal">
-                      <EditRecipe
-                        recipeDetails={recipeDetails}
-                        setRecipeDetails={setRecipeDetails}
-                        currentUser={currentUser}
-                      ></EditRecipe>
-                      <DeleteRecipe
-                        currentUser={currentUser}
-                        recipeDetails={recipeDetails}
-                        setRecipeDetails={setRecipeDetails}
-                        recipes={recipes}
-                        setRecipes={setRecipes}
-                        setRecipeDeleteMessage={setRecipeDeleteMessage}
-                        setIsRecipeDeleteMessageModalOpen={
-                          setIsRecipeDeleteMessageModalOpen
-                        }
-                      ></DeleteRecipe>
-                      {currentUser && (
-                        <AddBookmark
-                          setResultsType={setResultsType}
-                          isBookmarked={isBookmarked}
-                          setIsBookmarked={setIsBookmarked}
+              recipeDetails.creator === currentUser ? (
+                <div>
+                  <img
+                    src={iconMenu}
+                    alt="icons8 icon menu"
+                    className="icon_menu"
+                    onClick={() => setIsRecipeModalOpen(true)}
+                  ></img>
+                  {isRecipeModalOpen && (
+                    <div
+                      className="recipe_modal_overlay"
+                      onClick={(event) => {
+                        if (event.target === event.currentTarget)
+                          setIsRecipeModalOpen(false);
+                      }}
+                    >
+                      <div className="recipe_modal">
+                        <EditRecipe
                           recipeDetails={recipeDetails}
-                          userBookmarks={userBookmarks}
-                          setUserBookmarks={setUserBookmarks}
+                          setRecipeDetails={setRecipeDetails}
+                          currentUser={currentUser}
+                        ></EditRecipe>
+                        <DeleteRecipe
+                          currentUser={currentUser}
+                          recipeDetails={recipeDetails}
+                          setRecipeDetails={setRecipeDetails}
                           recipes={recipes}
                           setRecipes={setRecipes}
-                        ></AddBookmark>
-                      )}
+                          setRecipeDeleteMessage={setRecipeDeleteMessage}
+                          setIsRecipeDeleteMessageModalOpen={
+                            setIsRecipeDeleteMessageModalOpen
+                          }
+                        ></DeleteRecipe>
+                        {currentUser && (
+                          <AddBookmark
+                            isBookmarked={isBookmarked}
+                            setIsBookmarked={setIsBookmarked}
+                            recipeDetails={recipeDetails}
+                            userBookmarks={userBookmarks}
+                            setUserBookmarks={setUserBookmarks}
+                            recipes={recipes}
+                            setRecipes={setRecipes}
+                            setBookmarksIdList={setBookmarksIdList}
+                          ></AddBookmark>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              ) : (
+                currentUser && (
+                  <AddBookmark
+                    isBookmarked={isBookmarked}
+                    setIsBookmarked={setIsBookmarked}
+                    recipeDetails={recipeDetails}
+                    userBookmarks={userBookmarks}
+                    setUserBookmarks={setUserBookmarks}
+                    recipes={recipes}
+                    setRecipes={setRecipes}
+                    setBookmarksIdList={setBookmarksIdList}
+                  ></AddBookmark>
+                )
+              )
             ) : (
               <>
                 <EditRecipe
