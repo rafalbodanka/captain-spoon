@@ -19,6 +19,7 @@ from .models import UserBookmarks
 
 from django.shortcuts import get_object_or_404
 
+
 class RegistrationAPIView(generics.GenericAPIView):
     serializer_class = RegistrationSerializer
 
@@ -29,8 +30,10 @@ class RegistrationAPIView(generics.GenericAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class LoginView(TokenObtainPairView):
     serializer_class = TokenObtainPairSerializer
+
 
 class UserProfileAPIView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -47,6 +50,7 @@ class UserProfileAPIView(APIView):
         }
         return Response(user_data)
 
+
 class UserBookmarksAPIView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -59,7 +63,7 @@ class UserBookmarksAPIView(generics.ListAPIView):
             user_bookmarks = user.userbookmarks
         except:
             return Response("No data", status=status.HTTP_204_NO_CONTENT)
-            
+
         recipe_serializer = RecipeListSerializer(
             user_bookmarks.bookmarks.all(),
             many=True,
@@ -72,6 +76,29 @@ class UserBookmarksAPIView(generics.ListAPIView):
         }
 
         return Response(user_bookmarks_data)
+
+# Helper method to fetch and serialize user bookmarks
+
+
+def get_user_bookmarks_data(user):
+    try:
+        user_bookmarks = user.userbookmarks
+    except UserBookmarks.DoesNotExist:
+        return None
+
+    recipe_serializer = RecipeListSerializer(
+        user_bookmarks.bookmarks.all(),
+        many=True,
+        context={'request': request}
+    )
+    serialized_bookmarks = recipe_serializer.data
+
+    user_bookmarks_data = {
+        "bookmarks": serialized_bookmarks,
+    }
+
+    return user_bookmarks_data
+
 
 class BookmarkCreateAPIView(generics.CreateAPIView):
     authentication_classes = [JWTAuthentication]
@@ -94,26 +121,14 @@ class BookmarkCreateAPIView(generics.CreateAPIView):
         user_bookmarks = get_object_or_404(UserBookmarks, user=user)
         serializer = UserBookmarksSerializer(user_bookmarks)
 
-        #return all recipes after add operation
-        user_id = request.user.id
-        user = get_object_or_404(User, id=user_id)
-        try:
-            user_bookmarks = user.userbookmarks
-        except:
+        # Fetch and serialize user bookmarks after add operation
+        user_bookmarks_data = get_user_bookmarks_data(user)
+
+        if user_bookmarks_data:
+            return Response(data=user_bookmarks_data, status=status.HTTP_201_CREATED)
+        else:
             return Response("No data", status=status.HTTP_204_NO_CONTENT)
-            
-        recipe_serializer = RecipeListSerializer(
-            user_bookmarks.bookmarks.all(),
-            many=True,
-            context={'request': request}
-        )
-        serialized_bookmarks = recipe_serializer.data
 
-        user_bookmarks_data = {
-            "bookmarks": serialized_bookmarks,
-        }
-
-        return Response(data=user_bookmarks_data, status=status.HTTP_201_CREATED)
 
 class BookmarkDeleteAPIView(generics.DestroyAPIView):
     authentication_classes = [JWTAuthentication]
@@ -132,23 +147,10 @@ class BookmarkDeleteAPIView(generics.DestroyAPIView):
         recipe = get_object_or_404(user_bookmarks.bookmarks, id=recipe_id)
         self.perform_destroy(recipe)
 
-        #return all recipes after delete operation
-        user_id = request.user.id
-        user = get_object_or_404(User, id=user_id)
-        try:
-            user_bookmarks = user.userbookmarks
-        except:
+        # Fetch and serialize user bookmarks after add operation
+        user_bookmarks_data = get_user_bookmarks_data(user)
+
+        if user_bookmarks_data:
+            return Response(data=user_bookmarks_data, status=status.HTTP_201_CREATED)
+        else:
             return Response("No data", status=status.HTTP_204_NO_CONTENT)
-            
-        recipe_serializer = RecipeListSerializer(
-            user_bookmarks.bookmarks.all(),
-            many=True,
-            context={'request': request}
-        )
-        serialized_bookmarks = recipe_serializer.data
-
-        user_bookmarks_data = {
-            "bookmarks": serialized_bookmarks,
-        }
-
-        return Response(data=user_bookmarks_data, status=status.HTTP_200_OK)

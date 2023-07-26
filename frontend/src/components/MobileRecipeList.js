@@ -14,17 +14,6 @@ const MobileRecipeList = ({
   isSmallMobile,
   resultsType,
 }) => {
-  const [resultsPerPage, setResultsPerPage] = useState(10);
-
-  const indexOfLastResult = currentPage * resultsPerPage;
-  const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-
-  const numOfPages = Math.ceil(recipes.length / resultsPerPage);
-
-  const currentResults = recipes.length
-    ? recipes.slice(indexOfFirstResult, indexOfLastResult)
-    : [];
-
   const navigate = useNavigate();
 
   const handleClick = async (event, id) => {
@@ -83,7 +72,7 @@ const MobileRecipeList = ({
               </li>
             ))}
           {!isQueryResultsEmpty ? (
-            currentResults.map((recipe) => {
+            recipes.map((recipe) => {
               return (
                 <li className="preview" key={recipe.id}>
                   <div

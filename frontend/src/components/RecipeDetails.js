@@ -252,7 +252,10 @@ const RecipeDetails = ({
         </div>
       </div>
       {isRecipeDeleteMessageModalOpen && (
-        <div>
+        <div
+          className="upload_result_modal-overlay"
+          onClick={handleRecipeDeleteMessageModalClose}
+        >
           <div className="upload_result_modal">
             {recipeDeleteMessage}
             <div
@@ -262,10 +265,6 @@ const RecipeDetails = ({
               OK
             </div>
           </div>
-          <div
-            className="upload_result_modal-overlay"
-            onClick={handleRecipeDeleteMessageModalClose}
-          ></div>
         </div>
       )}
     </>

@@ -39,7 +39,6 @@ const DeleteRecipe = ({
       .catch((error) => {
         setRecipeDeleteMessage(`Something went wrong, try again! ${error}`);
         setIsRecipeDeleteMessageModalOpen(true);
-        console.log(error);
       });
   };
 
