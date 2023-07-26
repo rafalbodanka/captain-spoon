@@ -94,7 +94,6 @@ const Header = ({
       lowerCaseSearchQuery === "bookmark" ||
       lowerCaseSearchQuery === "bookmarks"
     ) {
-      setSearchQuery("bookmarks");
       setRecipes(userBookmarks);
       setCurrentPage(1);
       setLoadingRecipeList(false);

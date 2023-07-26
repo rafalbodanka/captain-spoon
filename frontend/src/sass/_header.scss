@@ -25,7 +25,7 @@
   .search_form-container {
     display: flex;
     justify-content: center;
-    }
+  }
 
   .search_form {
     position: relative;
@@ -92,7 +92,6 @@
       }
     }
 
-
     .recipe_add-btn {
       font-size: 42px;
       width: 60px;
@@ -107,23 +106,6 @@
         background-color: $dark-orange;
         cursor: pointer;
         transition: all 0.25s;
-      }
-    }
-
-    .user_icon {
-      position: relative;
-      cursor: pointer;
-      transition: all 0.25s;
-      align-items: center;
-      display: flex;
-      font-size: larger;
-      font-weight: bold;
-      padding-right: 10px;
-      gap: 4px;
-      align-content: center;
-
-      &:hover {
-        background-color: $dark-orange;
       }
     }
 
@@ -240,7 +222,7 @@
     @media (max-width: 600px) {
       width: 60%;
     }
-    
+
     &-grid {
       padding-top: 80px;
       display: grid;
@@ -253,6 +235,7 @@
       cursor: pointer;
       transition: all 0.25s;
       align-items: center;
+      justify-content: center;
       display: flex;
       font-size: larger;
       font-weight: bold;
