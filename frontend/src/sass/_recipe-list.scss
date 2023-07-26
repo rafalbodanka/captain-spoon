@@ -126,23 +126,13 @@
 
 .pagination {
   margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
   padding: 0.5rem 3.5rem;
 
-  &::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
   &__btn {
-    &--prev {
-      float: left;
-      transition: all 0s;
-    }
-    &--next {
-      float: right;
-      transition: all 0s;
-    }
+    transition: all 0s;
   }
 }
 
@@ -153,8 +143,9 @@
   padding: 0.8rem 1.2rem;
   border-radius: 2rem;
   cursor: pointer;
-
+  min-width: 120px;
   display: flex;
+  justify-content: center;
   align-items: center;
   transition: all 0.2s;
 

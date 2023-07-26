@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import RecipeIngredients from "./RecipeIngredients";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { getJSON } from "../helper";
 import { API_DETAIL_URL } from "../config";
 import iconMenu from "../img/icon_menu.png";
-import iconSmile from "../img/icon-smile.png"
+import iconSmile from "../img/icon-smile.png";
 import EditRecipe from "./EditRecipe";
 import DeleteRecipe from "./DeleteRecipe";
 
@@ -35,7 +35,7 @@ const RecipeDetails = ({
   const [recipeUploadMessage, setRecipeUploadMessage] = useState("");
   const [isRecipeUploadMessageModalOpen, setIsRecipeUploadMessageModalOpen] =
     useState(false);
-  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false)
+  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
 
   const [isBookmarked, setIsBookmarked] = useState(false);
 
@@ -43,7 +43,6 @@ const RecipeDetails = ({
     setIsBookmarked(bookmarksIdList.includes(recipeDetails.id));
   }, [recipeDetails]);
 
-    
   const location = useLocation();
   useEffect(() => {
     // Check if the URL contains a hashtag
@@ -58,13 +57,13 @@ const RecipeDetails = ({
     const data = await getJSON(`${API_DETAIL_URL}${id}/`);
 
     //set scaling offset for every ingredient for changing servings purposes
-    const ingredientWithOffset = data.ingredients.map(ingredient => {
-      if (!ingredient.quantity) return ingredient
+    const ingredientWithOffset = data.ingredients.map((ingredient) => {
+      if (!ingredient.quantity) return ingredient;
       const scalingOffset = ingredient.quantity / data.servings;
-      return { ...ingredient, scalingOffset};
-    })
+      return { ...ingredient, scalingOffset };
+    });
     setLoadingRecipeDetail(false);
-    setRecipeDetails({...data, ingredients: ingredientWithOffset});
+    setRecipeDetails({ ...data, ingredients: ingredientWithOffset });
   };
 
   const handleRecipeUploadMessageModaClose = () => {
@@ -84,15 +83,15 @@ const RecipeDetails = ({
 
   if (loading) {
     return (
-      <section className="details">
+      <section className="spinner_container">
         <div className="spinner"></div>
       </section>
     );
   }
 
-  if(loadingRecipeDetail) {
+  if (loadingRecipeDetail) {
     return (
-      <section className="details">
+      <section className="spinner_container">
         <div className="spinner"></div>
       </section>
     );
@@ -100,101 +99,112 @@ const RecipeDetails = ({
 
   return recipeDetails ? (
     <>
-    <div className="recipe">
-      <div className="recipe__control_container">
-        <h1>{recipeDetails.title}</h1>
-        <div className="recipe__control-btns">
-          {isSmallMobile ? 
-          <div>
-            <img src={iconMenu} alt="icons8 icon menu" className="icon_menu" onClick={() => setIsRecipeModalOpen(true)}></img>
-            {isRecipeModalOpen && 
-              <div className="recipe_modal_overlay" onClick={(event) => {
-                if(event.target === event.currentTarget) setIsRecipeModalOpen(false)
-              }}>
-                <div className="recipe_modal">
-                  <EditRecipe
+      <div className="recipe">
+        <div className="recipe__control_container">
+          <h1>{recipeDetails.title}</h1>
+          <div className="recipe__control-btns">
+            {isSmallMobile ? (
+              <div>
+                <img
+                  src={iconMenu}
+                  alt="icons8 icon menu"
+                  className="icon_menu"
+                  onClick={() => setIsRecipeModalOpen(true)}
+                ></img>
+                {isRecipeModalOpen && (
+                  <div
+                    className="recipe_modal_overlay"
+                    onClick={(event) => {
+                      if (event.target === event.currentTarget)
+                        setIsRecipeModalOpen(false);
+                    }}
+                  >
+                    <div className="recipe_modal">
+                      <EditRecipe
+                        recipeDetails={recipeDetails}
+                        setRecipeDetails={setRecipeDetails}
+                        currentUser={currentUser}
+                      ></EditRecipe>
+                      <DeleteRecipe
+                        currentUser={currentUser}
+                        recipeDetails={recipeDetails}
+                        setRecipeDetails={setRecipeDetails}
+                        recipes={recipes}
+                        setRecipes={setRecipes}
+                        setRecipeDeleteMessage={setRecipeDeleteMessage}
+                        setIsRecipeDeleteMessageModalOpen={
+                          setIsRecipeDeleteMessageModalOpen
+                        }
+                      ></DeleteRecipe>
+                      {currentUser && (
+                        <AddBookmark
+                          setResultsType={setResultsType}
+                          isBookmarked={isBookmarked}
+                          setIsBookmarked={setIsBookmarked}
+                          recipeDetails={recipeDetails}
+                          userBookmarks={userBookmarks}
+                          setUserBookmarks={setUserBookmarks}
+                          recipes={recipes}
+                          setRecipes={setRecipes}
+                        ></AddBookmark>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <EditRecipe
+                  recipeDetails={recipeDetails}
+                  setRecipeDetails={setRecipeDetails}
+                  currentUser={currentUser}
+                ></EditRecipe>
+                <DeleteRecipe
+                  currentUser={currentUser}
+                  recipeDetails={recipeDetails}
+                  setRecipeDetails={setRecipeDetails}
+                  recipes={recipes}
+                  setRecipes={setRecipes}
+                  setRecipeDeleteMessage={setRecipeDeleteMessage}
+                  setIsRecipeDeleteMessageModalOpen={
+                    setIsRecipeDeleteMessageModalOpen
+                  }
+                ></DeleteRecipe>
+                <div className="recipe_details_header"></div>
+                {currentUser && (
+                  <AddBookmark
+                    isBookmarked={isBookmarked}
+                    setIsBookmarked={setIsBookmarked}
                     recipeDetails={recipeDetails}
-                    setRecipeDetails={setRecipeDetails}
-                    currentUser={currentUser}
-                  ></EditRecipe>
-                  <DeleteRecipe
-                    currentUser={currentUser}
-                    recipeDetails={recipeDetails}
-                    setRecipeDetails={setRecipeDetails}
+                    userBookmarks={userBookmarks}
+                    setUserBookmarks={setUserBookmarks}
                     recipes={recipes}
                     setRecipes={setRecipes}
-                    setRecipeDeleteMessage={setRecipeDeleteMessage}
-                    setIsRecipeDeleteMessageModalOpen={
-                      setIsRecipeDeleteMessageModalOpen
-                    }
-                  ></DeleteRecipe>
-                  {currentUser &&
-                    <AddBookmark
-                      setResultsType={setResultsType}
-                      isBookmarked={isBookmarked}
-                      setIsBookmarked={setIsBookmarked}
-                      recipeDetails={recipeDetails}
-                      userBookmarks={userBookmarks}
-                      setUserBookmarks={setUserBookmarks}
-                      recipes={recipes}
-                      setRecipes={setRecipes}
-                    ></AddBookmark>
-                  }
-                </div>
-              </div>
-            }
+                    setBookmarksIdList={setBookmarksIdList}
+                  ></AddBookmark>
+                )}
+              </>
+            )}
           </div>
-          :
-          <>
-            <EditRecipe
-              recipeDetails={recipeDetails}
-              setRecipeDetails={setRecipeDetails}
-              currentUser={currentUser}
-            ></EditRecipe>
-            <DeleteRecipe
-              currentUser={currentUser}
-              recipeDetails={recipeDetails}
-              setRecipeDetails={setRecipeDetails}
-              recipes={recipes}
-              setRecipes={setRecipes}
-              setRecipeDeleteMessage={setRecipeDeleteMessage}
-              setIsRecipeDeleteMessageModalOpen={
-                setIsRecipeDeleteMessageModalOpen
-              }
-            ></DeleteRecipe>
-            <div className="recipe_details_header">
-            </div>
-            {currentUser &&
-              <AddBookmark
-                isBookmarked={isBookmarked}
-                setIsBookmarked={setIsBookmarked}
-                recipeDetails={recipeDetails}
-                userBookmarks={userBookmarks}
-                setUserBookmarks={setUserBookmarks}
-                recipes={recipes}
-                setRecipes={setRecipes}
-                setBookmarksIdList={setBookmarksIdList}
-              ></AddBookmark>
-            }
-            </>
-          }
-          </div>
-      </div>
-      <figure className="recipe__fig">
-        <img
-          src={recipeDetails.image_url}
-          alt={recipeDetails.title}
-          className="recipe__img"
-        />
-      </figure>
-      <div className="recipe__details">
-        <div className="recipe__info">
-          <span className="recipe__info-data recipe__info-data--minutes">
-            {recipeDetails.cooking_time}
-          </span>
-          <span className="recipe__info-text">minutes</span>
         </div>
-            <RecipeServings recipeDetails={recipeDetails} setRecipeDetails={setRecipeDetails}></RecipeServings>
+        <figure className="recipe__fig">
+          <img
+            src={recipeDetails.image_url}
+            alt={recipeDetails.title}
+            className="recipe__img"
+          />
+        </figure>
+        <div className="recipe__details">
+          <div className="recipe__info">
+            <span className="recipe__info-data recipe__info-data--minutes">
+              {recipeDetails.cooking_time}
+            </span>
+            <span className="recipe__info-text">minutes</span>
+          </div>
+          <RecipeServings
+            recipeDetails={recipeDetails}
+            setRecipeDetails={setRecipeDetails}
+          ></RecipeServings>
         </div>
         <div className="recipe__ingredients">
           <h2 className="recipe__heading">Ingredients</h2>
@@ -224,9 +234,17 @@ const RecipeDetails = ({
           <h2 className="recipe__heading">Tags</h2>
           <div className="recipe__tags-container">
             {recipeDetails.tags.map((tag, index) => {
-                return (<div className="recipe__tags-tag" key={tag} onClick={() => {
-                  setSearchQuery(tag)
-                }}>#{tag} </div>)
+              return (
+                <div
+                  className="recipe__tags-tag"
+                  key={tag}
+                  onClick={() => {
+                    setSearchQuery(tag);
+                  }}
+                >
+                  #{tag}{" "}
+                </div>
+              );
             })}
           </div>
         </div>
@@ -248,17 +266,19 @@ const RecipeDetails = ({
           ></div>
         </div>
       )}
-        </>
-    ) : (
-      <div className="message">{
-        isSmallMobile ? <p>What argh we gonna cook today?</p>
-        : 
+    </>
+  ) : (
+    <div className="message">
+      {isSmallMobile ? (
+        <p>What argh we gonna cook today?</p>
+      ) : (
         <div className="message-start">
           <p>Start by looking for a recipe or an ingredient.&nbsp;</p>
           <img src={iconSmile} className="message-start-img"></img>
-        </div>}
         </div>
-    )
+      )}
+    </div>
+  );
 };
 
 export default RecipeDetails;
