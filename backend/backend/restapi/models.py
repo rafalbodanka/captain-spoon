@@ -17,9 +17,6 @@ def validate_quantity(value):
         raise ValidationError('Quantity must be greater than zero.')
 
 
-# Create your models here.
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=255, validators=[
                             validate_tag_name], unique=True)

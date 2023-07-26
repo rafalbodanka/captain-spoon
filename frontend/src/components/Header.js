@@ -232,7 +232,7 @@ const Header = ({
                         className="user__icon-img"
                         alt="User_Icon"
                       />
-                      <span>{username}</span>
+                      <div>{username}</div>
                     </div>
                     {isDropdownOpen && (
                       <div className="dropdown">

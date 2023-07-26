@@ -14,11 +14,6 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth.models import User
 
 
-# Create your views here.
-
-# all recieps list view
-
-
 class RecipeListAPIView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -42,8 +37,6 @@ class RecipeListAPIView(generics.ListCreateAPIView):
 
         return queryset.order_by('id')
 
-# particular recipe view
-
 
 class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Recipe.objects.all()
@@ -64,10 +57,10 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-def delete(self, request, pk, format=None):
-    recipe = self.get_object()
-    recipe.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, pk, format=None):
+        recipe = self.get_object()
+        recipe.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class RecipeAddView(generics.CreateAPIView):

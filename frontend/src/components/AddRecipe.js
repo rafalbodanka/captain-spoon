@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 
@@ -17,6 +17,41 @@ const AddRecipe = ({ isOpen, onRequestClose }) => {
   });
 
   const [errorFormData, setErrorFormData] = useState({});
+
+  // scrolling to first occurence of error
+  const formRef = useRef(null);
+
+  const scrollToFirstError = () => {
+    return new Promise((resolve, reject) => {
+      let timeoutId;
+      const checkForErrorsAndScroll = () => {
+        const errorFields = Array.from(
+          formRef.current.querySelectorAll(".add_recipe_field_error")
+        );
+        if (errorFields.length > 0) {
+          const firstErrorField = errorFields[0];
+          const parentElement = firstErrorField.parentElement;
+          parentElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+          clearTimeout(timeoutId); // Clear the timeout if errors are found
+          resolve(); // Resolve the promise after scrolling
+        } else {
+          requestAnimationFrame(checkForErrorsAndScroll); // Keep checking for errors until they appear
+        }
+      };
+
+      // Start checking for errors and scrolling
+      requestAnimationFrame(checkForErrorsAndScroll);
+
+      // Set a timeout to reject the promise if errors don't appear within a certain time
+      timeoutId = setTimeout(() => {
+        clearTimeout(timeoutId);
+        reject(new Error("Timeout: Errors did not appear"));
+      }, 5000);
+    });
+  };
 
   // Form validation
   const validateForm = (formData) => {
@@ -94,6 +129,7 @@ const AddRecipe = ({ isOpen, onRequestClose }) => {
         resolve();
       } else {
         reject();
+        scrollToFirstError();
       }
     });
   };
@@ -243,7 +279,7 @@ const AddRecipe = ({ isOpen, onRequestClose }) => {
     <>
       {isOpen ? (
         <div className="add_recipe-modal-overlay">
-          <div className="add_recipe-modal">
+          <div ref={formRef} className="add_recipe-modal">
             <div className="close_btn_container">
               <div className="close_btn" onClick={onRequestClose}>
                 +
