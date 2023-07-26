@@ -18,6 +18,7 @@ const AddRecipe = ({ isOpen, onRequestClose }) => {
 
   const [errorFormData, setErrorFormData] = useState({});
 
+  // Form validation
   const validateForm = (formData) => {
     return new Promise((resolve, reject) => {
       let errors = {};
@@ -105,6 +106,7 @@ const AddRecipe = ({ isOpen, onRequestClose }) => {
     setIsRecipeUploadMessageModalOpen(false);
   };
 
+  // Form submitting
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -155,8 +157,7 @@ const AddRecipe = ({ isOpen, onRequestClose }) => {
     });
   };
 
-  //Tags
-
+  // Tags
   const [tagValue, setTagValue] = useState("");
 
   const handleTagInputChange = (event) => {
@@ -187,8 +188,7 @@ const AddRecipe = ({ isOpen, onRequestClose }) => {
     setFormData({ ...formData, tags: newTags });
   };
 
-  //Ingredient
-
+  // Ingredients
   const [ingredientValue, setIngredientValue] = useState({
     name: "",
     quantity: "",
@@ -331,7 +331,6 @@ const AddRecipe = ({ isOpen, onRequestClose }) => {
                   </div>
                 )}
               </div>
-
               <div className="form_input">
                 <TextField
                   type="text"

@@ -10,11 +10,8 @@ const RecipeList = ({
   isQueryResultsEmpty,
   loadingRecipeList,
   resultsType,
-  setResultsType,
 }) => {
-  const [resultsPerPage, setResultsPerPage] = useState(10);
-  const [hashValue, setHashValue] = useState(window.location.hash);
-
+  const resultsPerPage = 10;
   const indexOfLastResult = currentPage * resultsPerPage;
   const indexOfFirstResult = indexOfLastResult - resultsPerPage;
 

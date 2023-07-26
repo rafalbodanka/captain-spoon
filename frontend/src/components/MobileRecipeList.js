@@ -13,7 +13,6 @@ const MobileRecipeList = ({
   isRecipeListLoading,
   isSmallMobile,
   resultsType,
-  setResultsType,
 }) => {
   const [resultsPerPage, setResultsPerPage] = useState(10);
 
@@ -25,14 +24,6 @@ const MobileRecipeList = ({
   const currentResults = recipes.length
     ? recipes.slice(indexOfFirstResult, indexOfLastResult)
     : [];
-
-  const goToNextPage = function () {
-    if (currentPage < numOfPages) setCurrentPage(currentPage + 1);
-  };
-
-  const goToPrevPage = function () {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
 
   const navigate = useNavigate();
 

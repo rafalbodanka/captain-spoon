@@ -18,7 +18,7 @@ const EditRecipe = ({ recipeDetails, currentUser, setRecipeDetails }) => {
 
   const [errorFormData, setErrorFormData] = useState({});
 
-  //scrolling to first occurence of error
+  // scrolling to first occurence of error
   const formRef = useRef(null);
 
   const scrollToFirstError = () => {
@@ -133,7 +133,7 @@ const EditRecipe = ({ recipeDetails, currentUser, setRecipeDetails }) => {
     });
   };
 
-  //load recipe details from current recipe
+  // loading recipe details from current recipe
   const setData = () => {
     setFormData(recipeDetails);
   };
@@ -194,8 +194,7 @@ const EditRecipe = ({ recipeDetails, currentUser, setRecipeDetails }) => {
     });
   };
 
-  //Tags
-
+  // Tags
   const [tagValue, setTagValue] = useState("");
 
   const handleTagInputChange = (event) => {
@@ -229,8 +228,7 @@ const EditRecipe = ({ recipeDetails, currentUser, setRecipeDetails }) => {
     setFormData({ ...formData, tags: newTags });
   };
 
-  //Ingredient
-
+  // Ingredients
   const [ingredientValue, setIngredientValue] = useState({
     name: "",
     quantity: "",
@@ -385,7 +383,6 @@ const EditRecipe = ({ recipeDetails, currentUser, setRecipeDetails }) => {
                   </div>
                 )}
               </div>
-
               <div className="form_input">
                 <TextField
                   type="text"

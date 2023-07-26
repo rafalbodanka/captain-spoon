@@ -5,7 +5,6 @@ import { USER_BOOKMARKS_URL } from "../config";
 import bookmarks_icon from "../img/bookmarks_icon.png";
 
 const Bookmarks = ({
-  setSearchQuery,
   isMobile,
   setRecipes,
   setCurrentPage,
@@ -17,9 +16,9 @@ const Bookmarks = ({
 }) => {
   const [isNoBookmarksModalOpen, setIsNoBookmarksModalOpen] = useState(false);
 
-  function closeEmptyUserBookmarksModal() {
+  const closeEmptyUserBookmarksModal = () => {
     setIsNoBookmarksModalOpen(false);
-  }
+  };
 
   return (
     <div

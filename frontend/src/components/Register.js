@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 
 import favicon from "../img/favicon.png";
-import user_icon from "../img/user_icon.png";
-import bookmarks_icon from "../img/bookmarks_icon.png";
-
-import captain_spoon from "../img/captain-spoon-invisible_bg.png"
+import captain_spoon from "../img/captain-spoon-invisible_bg.png";
 
 const Register = ({ isLoggedIn }) => {
   const [message, setMessage] = useState("");
@@ -20,12 +17,16 @@ const Register = ({ isLoggedIn }) => {
     event.preventDefault();
     const form = event.target;
     const data = new FormData(form);
-    const dataObject = Object.fromEntries(data.entries())
+    const dataObject = Object.fromEntries(data.entries());
 
-    if (dataObject.username === "" || dataObject.email === "" || dataObject.password === "") {
-      setMessage("All fields must be completed")
+    if (
+      dataObject.username === "" ||
+      dataObject.email === "" ||
+      dataObject.password === ""
+    ) {
+      setMessage("All fields must be completed");
       setIsMessageErrorStatus(true);
-      return
+      return;
     }
 
     const jsonData = JSON.stringify(dataObject);
@@ -71,31 +72,30 @@ const Register = ({ isLoggedIn }) => {
             <div className="page_title">Join the crew, landlubber!</div>
           </div>
           <div className="register_container">
-          <img className="captain_spoon-img" src={captain_spoon}></img> 
-          <div className="register">
-            <form onSubmit={handleSubmit} className="register_form">
-              <div className="register_form_item">
-                <p className="register_form_title">Username:</p>
-                <input type="text" id="username" name="username" />
-              </div>
-              <div className="register_form_item">
-                <p className="register_form_title">Email:</p>
-                <input type="email" id="email" name="email" />
-              </div>
-              <div className="register_form_item">
-                <p className="register_form_title">Password:</p>
-                <input type="password" id="password" name="password" />
-              </div>
-              {isMessageErrorStatus && (
-            <div className="register_message">{message}</div>
-          )}
-              <div className="register_form_btn">
-                <button type="submit">Register</button>
-              </div>
-            </form>
+            <img className="captain_spoon-img" src={captain_spoon}></img>
+            <div className="register">
+              <form onSubmit={handleSubmit} className="register_form">
+                <div className="register_form_item">
+                  <p className="register_form_title">Username:</p>
+                  <input type="text" id="username" name="username" />
+                </div>
+                <div className="register_form_item">
+                  <p className="register_form_title">Email:</p>
+                  <input type="email" id="email" name="email" />
+                </div>
+                <div className="register_form_item">
+                  <p className="register_form_title">Password:</p>
+                  <input type="password" id="password" name="password" />
+                </div>
+                {isMessageErrorStatus && (
+                  <div className="register_message">{message}</div>
+                )}
+                <div className="register_form_btn">
+                  <button type="submit">Register</button>
+                </div>
+              </form>
+            </div>
           </div>
-          </div>
-
         </div>
       )}
       {isRegistered && (
