@@ -37,7 +37,7 @@
 
   .close_btn_container {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 
     .close_btn {
       transform: rotate(45deg);

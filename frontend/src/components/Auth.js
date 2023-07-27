@@ -70,7 +70,7 @@ const Authenticate = ({ isLoggedIn, setIsLoggedIn, setUsername }) => {
     };
 
     checkJWT();
-  }, []);
+  });
 
   if (isLoading) {
     return (

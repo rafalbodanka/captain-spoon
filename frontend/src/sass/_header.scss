@@ -227,7 +227,7 @@
   height: 100%;
   z-index: 6000;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
 
@@ -240,7 +240,7 @@
     font-size: 24px;
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
 
     @media (max-width: 600px) {
       width: 60%;

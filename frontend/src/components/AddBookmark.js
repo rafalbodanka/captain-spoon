@@ -109,10 +109,15 @@ const AddBookmark = ({
     <>
       <div className="bookmark_icon" onClick={handleSubmit}>
         {isBookmarked ? (
-          <img className="bookmark_added" src={bookmark_icon_added}></img>
+          <img
+            className="bookmark_added"
+            alt="Bookmark added icon"
+            src={bookmark_icon_added}
+          ></img>
         ) : (
           <img
             className="bookmark_not-added"
+            alt="Bookmark not added icon"
             src={bookmark_icon_notadded}
           ></img>
         )}

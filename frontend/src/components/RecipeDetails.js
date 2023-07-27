@@ -10,7 +10,6 @@ import DeleteRecipe from "./DeleteRecipe";
 
 import AddBookmark from "./AddBookmark";
 import RecipeServings from "./RecipeServings";
-import { colors } from "@mui/material";
 
 const RecipeDetails = ({
   isSmallMobile,
@@ -275,7 +274,11 @@ const RecipeDetails = ({
       ) : (
         <div className="message-start">
           <p>Start by looking for a recipe or an ingredient.&nbsp;</p>
-          <img src={iconSmile} className="message-start-img"></img>
+          <img
+            alt="Icon smile"
+            src={iconSmile}
+            className="message-start-img"
+          ></img>
         </div>
       )}
     </div>

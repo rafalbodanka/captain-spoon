@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import iconSad from "../img/icon-sad.png";
 
@@ -103,7 +103,7 @@ const MobileRecipeList = ({
           ) : (
             <div className="no_results_message-mobile">
               <p>We couldn't find any matching recipe</p>
-              <img src={iconSad}></img>
+              <img alt="Icon sad" src={iconSad}></img>
             </div>
           )}
         </div>
