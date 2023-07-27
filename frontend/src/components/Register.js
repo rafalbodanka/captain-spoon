@@ -72,7 +72,11 @@ const Register = ({ isLoggedIn }) => {
             <div className="page_title">Join the crew, landlubber!</div>
           </div>
           <div className="register_container">
-            <img className="captain_spoon-img" src={captain_spoon}></img>
+            <img
+              className="captain_spoon-img"
+              alt="Captain spoon"
+              src={captain_spoon}
+            ></img>
             <div className="register">
               <form onSubmit={handleSubmit} className="register_form">
                 <div className="register_form_item">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import iconSad from "../img/icon-sad.png";
 
@@ -76,7 +76,8 @@ const RecipeList = ({
           })}
         {isQueryResultsEmpty && (
           <div className="no_results_message">
-            We couldn't find any matching recipe <img src={iconSad}></img>
+            We couldn't find any matching recipe{" "}
+            <img alt="Icon sad" src={iconSad}></img>
           </div>
         )}
       </div>

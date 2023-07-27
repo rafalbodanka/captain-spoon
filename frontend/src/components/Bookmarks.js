@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { USER_BOOKMARKS_URL } from "../config";
 
 import bookmarks_icon from "../img/bookmarks_icon.png";
 

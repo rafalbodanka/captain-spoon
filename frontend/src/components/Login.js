@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 
 import logo_icon from "../img/logo_icon-no-bg.png";
-import captain_spoon from "../img/captain-spoon-invisible_bg.png"
+import captain_spoon from "../img/captain-spoon-invisible_bg.png";
 
 const Login = ({ isLoggedIn, setIsLoggedIn, setUsername }) => {
   const [message, setMessage] = useState("");
@@ -29,12 +29,12 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setUsername }) => {
       setIsLoggedIn(true);
       setUsername(username);
     } catch (error) {
-        if (error.response.status === 400) {
-          setMessage("Insert username and password");
-        } else if (error.response.status === 401) {
-          setMessage("Invalid credentials");
-        }
-        setIsMessageErrorStatus(true);
+      if (error.response.status === 400) {
+        setMessage("Insert username and password");
+      } else if (error.response.status === 401) {
+        setMessage("Invalid credentials");
+      }
+      setIsMessageErrorStatus(true);
     }
   };
 
@@ -54,7 +54,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setUsername }) => {
             </div>
           </div>
           <div className="login_container">
-              <img className="captain_spoon-img" src={captain_spoon}></img> 
+            <img
+              className="captain_spoon-img"
+              alt="Captain Spoon"
+              src={captain_spoon}
+            ></img>
             <div className="login">
               <form onSubmit={handleSubmit} className="login_form">
                 <div className="login_form_item">
@@ -73,7 +77,6 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setUsername }) => {
                 </div>
               </form>
             </div>
-
           </div>
         </div>
       )}
